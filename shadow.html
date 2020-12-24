@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Shadow</title>
+    <script>
+function addShadow() {
+    const theDiv = document.getElementById("theDiv2")
+    const shadowRoot = theDiv.attachShadow({mode: 'open'})
+    const para = document.createElement("p")
+    para.textContent = "Hello, Again!"
+    shadowRoot.appendChild(para)
+}
+
+function colorGreen() {
+    document.body.querySelectorAll("p").forEach(function (el) {
+        el.style.color = "#00FF00"
+    })
+}
+
+function shadowGreen() {
+    const theDiv = document.getElementById("theDiv2")
+    theDiv.shadowRoot.querySelectorAll("p").forEach(function (el) {
+        el.style.color = "#00CC00"
+    })
+}
+    </script>
+</head>
+<body onload="addShadow()">
+    <div id="theDiv"><p>Hello, World!</p></div>
+    <div id="theDiv2">
+    </div>
+    <button onclick="colorGreen()">Green</button>
+    <button onclick="shadowGreen()">Shadow Green</button>
+</body>
+</html>

@@ -10,26 +10,28 @@ const makeHeader = (columnHeaders) => {
     return thead
 }
 
-const makeBody = (columns) => {
-    let tbody = document.createElement("tbody")
+const makeRow = (columns) => {
     let tr = document.createElement("tr")
-    for (let column in columns) {
+    for (let column of columns) {
         let td = document.createElement("td")
         td.innerHTML = column
         tr.appendChild(td)
     }
-    tbody.appendChild(tr)
-    return tbody
+    return tr
 }
 
-const makeTable = (id, header, row) => {
+const makeTable = (id, header, rows) => {
     let div = document.getElementById(id)
     let table = document.createElement("table")
+    let tbody = document.createElement("tbody")
     table.appendChild(makeHeader(header))
-    table.appendChild(makeBody(row))
+    for (row of rows) {
+        tbody.appendChild(makeRow(row))
+    }
+    table.appendChild(tbody)
     div.appendChild(table)
 }
 
 const startUp = () => {
-    setTimeout(() => makeTable("contentB", ["Column A"], ["Row 1, Column A"]), 5000)
+    setTimeout(() => makeTable("contentB", ["Column A", "Column B"], [["Row 1, Column A", "Row 1, Column B"], ["Row 2, Column A", "Row 2, Column B"]]), 5000)
 }
